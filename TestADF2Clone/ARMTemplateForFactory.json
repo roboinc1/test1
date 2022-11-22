@@ -1,0 +1,631 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "TestADF2Clone"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Test_dev_netsuite')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data flow12",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "dataflow1",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"HFCItemSchoolPrice": {},
+									"HFCKitListComponents": {},
+									"HFCTransactionsKitsAssembliesInventory": {},
+									"HFCAssemblyListComponents": {},
+									"HFCfinaljoinedfile": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "None",
+							"cacheSinks": {
+								"firstRowOnly": true
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-11-17T19:49:47Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/dataflow1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "HFC Item School Price.csv",
+						"container": "netsuitecontainer"
+					},
+					"columnDelimiter": "|",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Internal ID",
+						"type": "String"
+					},
+					{
+						"name": "Name",
+						"type": "String"
+					},
+					{
+						"name": "Display Name",
+						"type": "String"
+					},
+					{
+						"name": "Type",
+						"type": "String"
+					},
+					{
+						"name": "School Price",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "HFC Kit List Components.csv",
+						"container": "netsuitecontainer"
+					},
+					"columnDelimiter": "|",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Internal ID",
+						"type": "String"
+					},
+					{
+						"name": "Kit Internal ID",
+						"type": "String"
+					},
+					{
+						"name": "Kit Name",
+						"type": "String"
+					},
+					{
+						"name": "Kit Display Name",
+						"type": "String"
+					},
+					{
+						"name": "Component Internal ID",
+						"type": "String"
+					},
+					{
+						"name": "Component Name",
+						"type": "String"
+					},
+					{
+						"name": "Component Display Name",
+						"type": "String"
+					},
+					{
+						"name": "Component Qty",
+						"type": "String"
+					},
+					{
+						"name": "Component UOM",
+						"type": "String"
+					},
+					{
+						"name": "20% Off Retail",
+						"type": "String"
+					},
+					{
+						"name": "30% Off Retail",
+						"type": "String"
+					},
+					{
+						"name": "47% Off Retail",
+						"type": "String"
+					},
+					{
+						"name": "50% Off Retail",
+						"type": "String"
+					},
+					{
+						"name": "53% Off Retail",
+						"type": "String"
+					},
+					{
+						"name": "55% Off Retail",
+						"type": "String"
+					},
+					{
+						"name": "58% Off Retail",
+						"type": "String"
+					},
+					{
+						"name": "60% Off Retail",
+						"type": "String"
+					},
+					{
+						"name": "63% Off Retail",
+						"type": "String"
+					},
+					{
+						"name": "64% Off Retail",
+						"type": "String"
+					},
+					{
+						"name": "65% Off Retail",
+						"type": "String"
+					},
+					{
+						"name": "66% Off Retail",
+						"type": "String"
+					},
+					{
+						"name": "70% Off Retail",
+						"type": "String"
+					},
+					{
+						"name": "75% Off Retail",
+						"type": "String"
+					},
+					{
+						"name": "92% Off Retail",
+						"type": "String"
+					},
+					{
+						"name": "Complimentary",
+						"type": "String"
+					},
+					{
+						"name": "FAMIS",
+						"type": "String"
+					},
+					{
+						"name": "Free with Order",
+						"type": "String"
+					},
+					{
+						"name": "PCT9",
+						"type": "String"
+					},
+					{
+						"name": "Sample",
+						"type": "String"
+					},
+					{
+						"name": "School",
+						"type": "String"
+					},
+					{
+						"name": "Online Price",
+						"type": "String"
+					},
+					{
+						"name": "Formula (Numeric)",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "HFC Transactions of Kits Assemblies and Inventory.csv",
+						"container": "netsuitecontainer"
+					},
+					"columnDelimiter": "|",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Internal ID",
+						"type": "String"
+					},
+					{
+						"name": "Type1",
+						"type": "String"
+					},
+					{
+						"name": "Name",
+						"type": "String"
+					},
+					{
+						"name": "Display Name",
+						"type": "String"
+					},
+					{
+						"name": "Document Number4",
+						"type": "String"
+					},
+					{
+						"name": "Date",
+						"type": "String"
+					},
+					{
+						"name": "Type6",
+						"type": "String"
+					},
+					{
+						"name": "Document Number7",
+						"type": "String"
+					},
+					{
+						"name": "Sold Quantity",
+						"type": "String"
+					},
+					{
+						"name": "Sold Price",
+						"type": "String"
+					},
+					{
+						"name": "Sold Total Amount",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText4')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "outputnetsuite"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Excel1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "HFC | Assembly List Components",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "HFC Assembly List Components.xlsx",
+						"container": "netsuitecontainer"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Internal ID",
+						"type": "String"
+					},
+					{
+						"name": "Assembly Item Name",
+						"type": "String"
+					},
+					{
+						"name": "BOM Name",
+						"type": "String"
+					},
+					{
+						"name": "Revision Name",
+						"type": "String"
+					},
+					{
+						"name": "Internal ID",
+						"type": "String"
+					},
+					{
+						"name": "BOM Component Name",
+						"type": "String"
+					},
+					{
+						"name": "BOM Component Yeild",
+						"type": "String"
+					},
+					{
+						"name": "BOM Component Description ",
+						"type": "String"
+					},
+					{
+						"name": "BOM Whole Name",
+						"type": "String"
+					},
+					{
+						"name": "BOM Component Quantity",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dataflow1')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "DelimitedText1",
+								"type": "DatasetReference"
+							},
+							"name": "HFCItemSchoolPrice"
+						},
+						{
+							"dataset": {
+								"referenceName": "DelimitedText2",
+								"type": "DatasetReference"
+							},
+							"name": "HFCKitListComponents"
+						},
+						{
+							"dataset": {
+								"referenceName": "DelimitedText3",
+								"type": "DatasetReference"
+							},
+							"name": "HFCTransactionsKitsAssembliesInventory"
+						},
+						{
+							"dataset": {
+								"referenceName": "Excel1",
+								"type": "DatasetReference"
+							},
+							"name": "HFCAssemblyListComponents"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DelimitedText4",
+								"type": "DatasetReference"
+							},
+							"name": "HFCfinaljoinedfile",
+							"rejectedDataLinkedService": {
+								"referenceName": "AzureBlobStorage1",
+								"type": "LinkedServiceReference"
+							}
+						}
+					],
+					"transformations": [
+						{
+							"name": "join1"
+						},
+						{
+							"name": "join3"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          {Internal ID} as string,",
+						"          Name as string,",
+						"          {Display Name} as string,",
+						"          Type as string,",
+						"          {School Price} as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> HFCItemSchoolPrice",
+						"source(output(",
+						"          {Internal ID} as string,",
+						"          {Kit Internal ID} as string,",
+						"          {Kit Name} as string,",
+						"          {Kit Display Name} as string,",
+						"          {Component Internal ID} as string,",
+						"          {Component Name} as string,",
+						"          {Component Display Name} as string,",
+						"          {Component Qty} as string,",
+						"          {Component UOM} as string,",
+						"          {20% Off Retail} as string,",
+						"          {30% Off Retail} as string,",
+						"          {47% Off Retail} as string,",
+						"          {50% Off Retail} as string,",
+						"          {53% Off Retail} as string,",
+						"          {55% Off Retail} as string,",
+						"          {58% Off Retail} as string,",
+						"          {60% Off Retail} as string,",
+						"          {63% Off Retail} as string,",
+						"          {64% Off Retail} as string,",
+						"          {65% Off Retail} as string,",
+						"          {66% Off Retail} as string,",
+						"          {70% Off Retail} as string,",
+						"          {75% Off Retail} as string,",
+						"          {92% Off Retail} as string,",
+						"          Complimentary as string,",
+						"          FAMIS as string,",
+						"          {Free with Order} as string,",
+						"          PCT9 as string,",
+						"          Sample as string,",
+						"          School as string,",
+						"          {Online Price} as string,",
+						"          {Formula (Numeric)} as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> HFCKitListComponents",
+						"source(output(",
+						"          {Internal ID} as string,",
+						"          Type1 as string,",
+						"          Name as string,",
+						"          {Display Name} as string,",
+						"          {Document Number4} as string,",
+						"          Date as string,",
+						"          Type6 as string,",
+						"          {Document Number7} as string,",
+						"          {Sold Quantity} as string,",
+						"          {Sold Price} as string,",
+						"          {Sold Total Amount} as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> HFCTransactionsKitsAssembliesInventory",
+						"source(output(",
+						"          {Internal ID} as string,",
+						"          {Assembly Item Name} as string,",
+						"          {BOM Name} as string,",
+						"          {Revision Name} as string,",
+						"          {Internal ID_1} as string,",
+						"          {BOM Component Name} as string,",
+						"          {BOM Component Yeild} as string,",
+						"          {BOM Component Description } as string,",
+						"          {BOM Whole Name} as string,",
+						"          {BOM Component Quantity} as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> HFCAssemblyListComponents",
+						"HFCAssemblyListComponents, HFCKitListComponents join({BOM Component Name} == {Component Name},",
+						"     joinType:'inner',",
+						"     matchType:'exact',",
+						"     ignoreSpaces: false,",
+						"     broadcast: 'auto')~> join1",
+						"join1, HFCItemSchoolPrice join({Kit Name} == Name,",
+						"     joinType:'left',",
+						"     matchType:'exact',",
+						"     ignoreSpaces: false,",
+						"     broadcast: 'auto')~> join3",
+						"join3 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     filePattern:'HFCFinalOutput[n].csv',",
+						"     truncate: true,",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     mapColumn(",
+						"          {Assembly Name} = {Assembly Item Name},",
+						"          {Component Name} = {BOM Component Name},",
+						"          {Component Quantity} = {BOM Component Quantity},",
+						"          {Component Price} = School",
+						"     )) ~> HFCfinaljoinedfile"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DelimitedText1')]",
+				"[concat(variables('factoryId'), '/datasets/DelimitedText2')]",
+				"[concat(variables('factoryId'), '/datasets/DelimitedText3')]",
+				"[concat(variables('factoryId'), '/datasets/Excel1')]",
+				"[concat(variables('factoryId'), '/datasets/DelimitedText4')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		}
+	]
+}
