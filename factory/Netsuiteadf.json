@@ -1,0 +1,9 @@
+{
+	"name": "Netsuiteadf",
+	"location": "southindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "f731ef5e-9110-4458-8940-7a189f8be265",
+		"tenantId": "e1b6765e-b69b-4ee4-87ad-736da765391c"
+	}
+}

@@ -1,0 +1,69 @@
+{
+	"name": "DelimitedText3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "HFC Transactions of Kits Assemblies and Inventory.csv",
+				"container": "netsuitecontainer"
+			},
+			"columnDelimiter": "|",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Internal ID",
+				"type": "String"
+			},
+			{
+				"name": "Type1",
+				"type": "String"
+			},
+			{
+				"name": "Name",
+				"type": "String"
+			},
+			{
+				"name": "Display Name",
+				"type": "String"
+			},
+			{
+				"name": "Document Number4",
+				"type": "String"
+			},
+			{
+				"name": "Date",
+				"type": "String"
+			},
+			{
+				"name": "Type6",
+				"type": "String"
+			},
+			{
+				"name": "Document Number7",
+				"type": "String"
+			},
+			{
+				"name": "Sold Quantity",
+				"type": "String"
+			},
+			{
+				"name": "Sold Price",
+				"type": "String"
+			},
+			{
+				"name": "Sold Total Amount",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

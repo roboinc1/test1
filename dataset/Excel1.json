@@ -1,0 +1,63 @@
+{
+	"name": "Excel1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "HFC | Assembly List Components",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "HFC Assembly List Components.xlsx",
+				"container": "netsuitecontainer"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Internal ID",
+				"type": "String"
+			},
+			{
+				"name": "Assembly Item Name",
+				"type": "String"
+			},
+			{
+				"name": "BOM Name",
+				"type": "String"
+			},
+			{
+				"name": "Revision Name",
+				"type": "String"
+			},
+			{
+				"name": "Internal ID",
+				"type": "String"
+			},
+			{
+				"name": "BOM Component Name",
+				"type": "String"
+			},
+			{
+				"name": "BOM Component Yeild",
+				"type": "String"
+			},
+			{
+				"name": "BOM Component Description ",
+				"type": "String"
+			},
+			{
+				"name": "BOM Whole Name",
+				"type": "String"
+			},
+			{
+				"name": "BOM Component Quantity",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

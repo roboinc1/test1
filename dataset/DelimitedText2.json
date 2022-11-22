@@ -1,0 +1,153 @@
+{
+	"name": "DelimitedText2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "HFC Kit List Components.csv",
+				"container": "netsuitecontainer"
+			},
+			"columnDelimiter": "|",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Internal ID",
+				"type": "String"
+			},
+			{
+				"name": "Kit Internal ID",
+				"type": "String"
+			},
+			{
+				"name": "Kit Name",
+				"type": "String"
+			},
+			{
+				"name": "Kit Display Name",
+				"type": "String"
+			},
+			{
+				"name": "Component Internal ID",
+				"type": "String"
+			},
+			{
+				"name": "Component Name",
+				"type": "String"
+			},
+			{
+				"name": "Component Display Name",
+				"type": "String"
+			},
+			{
+				"name": "Component Qty",
+				"type": "String"
+			},
+			{
+				"name": "Component UOM",
+				"type": "String"
+			},
+			{
+				"name": "20% Off Retail",
+				"type": "String"
+			},
+			{
+				"name": "30% Off Retail",
+				"type": "String"
+			},
+			{
+				"name": "47% Off Retail",
+				"type": "String"
+			},
+			{
+				"name": "50% Off Retail",
+				"type": "String"
+			},
+			{
+				"name": "53% Off Retail",
+				"type": "String"
+			},
+			{
+				"name": "55% Off Retail",
+				"type": "String"
+			},
+			{
+				"name": "58% Off Retail",
+				"type": "String"
+			},
+			{
+				"name": "60% Off Retail",
+				"type": "String"
+			},
+			{
+				"name": "63% Off Retail",
+				"type": "String"
+			},
+			{
+				"name": "64% Off Retail",
+				"type": "String"
+			},
+			{
+				"name": "65% Off Retail",
+				"type": "String"
+			},
+			{
+				"name": "66% Off Retail",
+				"type": "String"
+			},
+			{
+				"name": "70% Off Retail",
+				"type": "String"
+			},
+			{
+				"name": "75% Off Retail",
+				"type": "String"
+			},
+			{
+				"name": "92% Off Retail",
+				"type": "String"
+			},
+			{
+				"name": "Complimentary",
+				"type": "String"
+			},
+			{
+				"name": "FAMIS",
+				"type": "String"
+			},
+			{
+				"name": "Free with Order",
+				"type": "String"
+			},
+			{
+				"name": "PCT9",
+				"type": "String"
+			},
+			{
+				"name": "Sample",
+				"type": "String"
+			},
+			{
+				"name": "School",
+				"type": "String"
+			},
+			{
+				"name": "Online Price",
+				"type": "String"
+			},
+			{
+				"name": "Formula (Numeric)",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
